@@ -16,10 +16,14 @@ def cadena_frecuencias(texto):
 def doble_lista(numeros):
     return list(map(lambda x: x*2, numeros))
 
-lista = [1,2,3,4,5]
-doble = doble_lista(lista)
-print(doble)
+
+# 3. Escribe una función que tome una lista de palabras y una palabra objetivo como parámetros. La función debe devolver una lista con todas las palabras de la lista original que contengan la palabra objetivo.
+
+def lista_palabra_objetivo(lista_palabras, objetivo):
+    return[palabra for palabra in lista_palabras if objetivo in palabra]
 
 
+
+ 
 
 
