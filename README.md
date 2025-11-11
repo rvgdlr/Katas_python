@@ -2,8 +2,7 @@
 
 ## 1. Escribe una función que reciba una cadena de texto como parámetro y devuelva un diccionario con las frecuencias de cada letra en la cadena. Los espacios no deben ser considerados.
 ## 2. Dada una lista de números, obtén una nueva lista con el doble de cada valor. Usa la función map()
-## 3. Escribe una función que tome una lista de palabras y una palabra objetivo como parámetros. La función debe
-devolver una lista con todas las palabras de la lista original que contengan la palabra objetivo.
+## 3. Escribe una función que tome una lista de palabras y una palabra objetivo como parámetros. La función debe devolver una lista con todas las palabras de la lista original que contengan la palabra objetivo.
 ## 4. Genera una función que calcule la diferencia entre los valores de dos listas. Usa la función map()
 ## 5. Ecribe una función que tome una lista de números como parámetro y un valor opcional nota_aprobado, que por defecto es 5. La función debe calcular la media de los números en la lista y determinar si la media es mayor o igual que nota aprobado. Si es así, el estado será "aprobado", de lo contrario, será "suspenso". La función debe devolver una tupla que contenga la media y el estado.
 ## 6. Escribe una función que calcule el factorial de un número de manera recursiva.
