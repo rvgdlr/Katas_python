@@ -218,14 +218,206 @@ def anagramas(palabra_1,palabra_2):
     ordenada_2 = sorted(palabra_2)
     return ordenada_1 == ordenada_2
 
+# 31. Crea una función que solicite al usuario ingresar una lista de nombres y luego solicite un nombre para buscar en la lista. Si el nombre está en la lista, se imprime un mensaje indicando que fue encontrado, d elo contrario, se lanza una excepción
+
+def buscar_nombre():
+    try:
+        lista_nombres = input("Escriba una lista de nombres: ")
+        nombre_a_buscar = input("Nombre que quiere buscar: ")
+        if nombre_a_buscar in lista_nombres:
+            print(f"El nombre {nombre_a_buscar} fue encontrado en la lista")
+        else:
+            raise ValueError (f"El nombre {nombre_a_buscar} no se encuentra en la lista")
+    except ValueError as error:
+        print (error)
+
+# 32. Crea una función que tome un nombre completo y una lista de empleados, busque el nombre completo en la lista y devuelve el puesto del empleado si está en la lista, de lo contrario, devuelve un mensaje indicando que la persona no trabaja aquí.
+
+def nombre_puesto(nombre, lista_empleados):
+    for empleado in lista_empleados:
+        if empleado ["nombre"].lower() == nombre.lower():
+            return f"{empleado["nombre"]} trabaja como {empleado["puesto"]}"
+
+
+# 33. Crea una función lambda que sume elementos correspondientes de dos listas dadas
+
+def suma_listas(lista_1, lista_2):
+    return list(map(lambda x, y: x + y, lista_1, lista_2))
+
+# 34. Crea la clase arbol, define un árbol genérico con un tronco y ramas atributos. Los métdos disponibles son: crecer_tronco, nueva_rama, crecer_ramas, quitar_rama e info_arbol. El objetivo es implantar estos métodos para manipular la estrucutra del arbol
+
+class Arbol:
+    def __init__(self):
+        #1 . Iniciar tronoco desde 1 y lista vacía pra las ramas
+        self.tronco = 1   
+        self.ramas = [] 
+
+    def crecer_tronco(self):
+        self.tronco +=1 # 2. Aumenta la longitud del tronco en una unidad
+        print ("El tronco ha crecido. Longitud actual:", self.tronco)
+    
+    def nueva_rama(self):
+        self.ramas.append(1) # 3. Agrega una nueva rama de longitud
+        print("Nueva rama añadida. Total de ramas:", len(self.ramas))
+    
+    def crecer_ramas(self):
+        # 4. Aumenta la longitud de todas las ramas en una unidad
+        if not self.ramas:
+            print("No hay ramas que hacer crecer")
+            return
+        self.ramas = [rama + 1 for rama in self.ramas]
+        print("Todas las ramas han crecido una unidad")
+    
+    def quitar_rama(self, posicion):
+        # 5. Elimina una rama en una posición específica, comenzando desde 1
+        if 1 <= posicion <= len(self.ramas):
+            rama_eliminada = self.ramas.pop(posicion - 1)
+            print(f"Se ha eliminado la rama número {posicion} longitud: {rama_eliminada}")
+        else:
+            print("Posición no válida. No se ha eliminado ningua rama")
+
+    def info_arbol(self):
+        # 6. Muestra información completa del árbol"
+        print("\n Información del arbol:")
+        print(f" - Longitud del tronco: {self.tronco}")
+        print(f" - Número de ramas; {len(self.ramas)}")
+        print(f" - Longitudes de las ramas: {self.ramas if self.ramas else 'sin ramas todavía'}")
+
+# CASOS DE USO
+## 1. Crear un árbol
+mi_arbol = Arbol()
+print("Se ha plantado un árbol nuevo")
+
+## 2. Hacer crecer el tronco del arbol una unidad
+mi_arbol.crecer_tronco()
+
+## 3. Añadir una nueva rama al árbol
+mi_arbol.nueva_rama()
+
+## 4. Hacer crecer todas las ramas del árbol una unidad
+mi_arbol.crecer_ramas()
+
+## 5. Añadir dos nuevas ramas al árbol
+mi_arbol.nueva_rama()
+mi_arbol.nueva_rama()
+
+## 6. Retirar la rama situada en la posición 2
+mi_arbol.quitar_rama(2)
+
+## Obtener información sobre el árbol
+mi_arbol.info_arbol()
+
+
+# 36. Crea la clase UsuarioBanco, representa a un usuario de un banco con su nombre, saldo y si tiene o no cuenta corriente. Proporciona métodos para realizar operaciones como retirar dinero, transferir dinero dede otro usuario y agregar dinero al saldo
+
+class UsuarioBanco:
+    def __init__(self, nombre, saldo, cuenta_corriente):
+        # 1. Inicializar un usuario con su nombre, slado y si tien o no cuenta corriente mediante true y false
+        self.nombre = nombre
+        self.saldo = saldo
+        self.cuenta_corriente = cuenta_corriente
+
+    def retirar_dinero(self, cantidad):
+        # 2. Implementar el método retirar_dinero para retirar dinero del saldo del usuario. Lanzará un error en caso de no poder hacerse
+        if not self.cuenta_corriente:
+            raise Exception(f"{self.nombre} no tiene cuenta corrriente. No puede retirar dienero")
+        if cantidad > self.saldo:
+            raise Exception(f"{self.nombre} no tiene suficiente saldo para retirar {cantidad}")
+        self.saldo -= cantidad
+        print(f"{self.nombre} ha retirado {cantidad}. Saldo restante {self.saldo}")
+
+    def transferir_dinero(self, otro_usuario, cantidad):
+        # 3. Implementar el método transferir_dinero para realizar una transferencia desde otro usuario al usuario actual. Lanzará un error en caso de no poderse hacer.
+        if not otro_usuario.cuenta_corriente:
+            raise Exception(f"{otro_usuario.nombre} no teine cuenta corriente. No puede transferir dinero.")
+        if cantidad > otro_usuario.saldo:
+            raise Exception(f"{otro_usuario.nombre} no tienen suficiente saldo para transferir {cantidad}")
+        otro_usuario.saldo -= cantidad
+        self.saldo += cantidad
+        print (f"{otro_usuario.nombre} ha transferido {cantidad} a {self.nombre}")
+        print (f"Nuevo saldo de {self.nombre}: {self.saldo}")
+        print (f"Nuevo saldo de {otro_usuario.nombre}: {otro_usuario.saldo}")
+
+    def agregar_dinero(self, cantidad):
+        # 4. Implimentar el métdo agregar_dinero para agregar dinero al saldo del usuario
+        self.saldo += cantidad
+        print(f"{self.nombre} ha agregado {cantidad}. Nuevo saldo:{self.saldo}")
+
+# CASOS DE USO
+## 1 Crear dos usuarios
+alicia = UsuarioBanco("alicia", 100, True)
+bob = UsuarioBanco("bob", 50, True)
+
+## 2. Agregar 20 unidades de saldo a bob
+bob.agregar_dinero(20)
+
+## 3. Hacer una tranferencia de 80 unidades desde bob a alicia
+alicia.transferir_dinero(bob, 80)
+
+## 4. Retirar 50 unidades de saldo a alicia
+alicia.retirar_dinero(50)
+
+# 37. Crea una función llamdad procesar_texto que procesa un texto según la opción especificada: contar_palabras, reemplazar_palabras, eliminar_palabras. Estas opciones son otras funciones que tenemos que definir primero y llamar dentro de la función procesar_texto
+
+## 1. Crear una función contar_palabras para contar el número de veces que aparece cada palabra en el texto. Tiene que devolver un diccionario
+
+def contar_palabras(texto):
+    palabras = texto.lower().split() #Texto en minúsculas y separamos por espacios
+    conteo = {} # Creo un diccionario vacío
+    for palabra in palabras:
+        if palabra in conteo:
+            conteo[palabra] += 1
+        else:
+            conteo[palabra] = 1
+    return conteo
+
+## 2. Crear una función reemplazar_palabras para reempalzr una palabra_original del texto por una palabra_nueva. Tiene que devolver el texto con el remplaxo de palabras
+
+def reemplazar_palabras (texto, palabra_original, palabra_nueva):
+    nuevo_texto = texto.replace(palabra_original, palabra_nueva)
+    return nuevo_texto
+
+## 3. Crear una función eliminar_palabra para eliminar una palabra del texto. Tiene que devolver el texto con la palabra eliminada
+
+def eliminar_palabra(texto, palabra_eliminar):
+    palabras = texto.split()
+    palabras_filtradas =[p for p in palabras if p != palabra_eliminar]
+    nuevo_texto = " ".join(palabras_filtradas)
+    return nuevo_texto
+
+## 4. Crear una función procesar_texto que tome un texto, una opción ente "contar", "reemplazar", "eliminar" y un número de argumentos variables según la opción indicada
+
+def procesar_texto(texto, opcion, *args):
+    if opcion == "contar":
+        return contar_palabras(texto)
+    elif opcion == "reemplazar":
+        if len(args) != 2:
+            raise ValueError("Debes indicar palabra_original y palabra_nueva para reemplazar")
+
+        return reemplazar_palabras(texto, args[0], args[1])
+    elif opcion == "eliminar":
+        if len(args) != 1:
+            raise ValueError("Debes de indicar la palabra a elimianar")
+        return eliminar_palabra(texto, args[0])
+    else:
+        raise ValueError("Opción no válida. Usa: 'contar', 'reemplazar' o'eliminar'")
+    
+# CASO DE USO. Comprueba el funcionamiento completo de la función procesar_texto
+## 1. Contar palabras
+print("Conteo de palabras:")
+print(procesar_texto(texto_original, "contar"))
+
+## 2. Reemplazr palabras
+print("\n reemplazo de palabra:")
+print(procesar_texto(texto_original, "reemplazar", "Python","Programa"))
+
+## 3. Eliminar palabra
+print("\n Eliminación de palabra:")
+print(procesar_texto(texto_original, "eliminar", "fácil"))
 
 
 
-
-
-
-
-
+    
 
 
 
