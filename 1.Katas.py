@@ -415,8 +415,26 @@ print(procesar_texto(texto_original, "reemplazar", "Python","Programa"))
 print("\n Eliminación de palabra:")
 print(procesar_texto(texto_original, "eliminar", "fácil"))
 
+# 38. Genera un programa que nos diga si es de noche, de día o tarde según la hora proporcionada por el usuario
 
+hora = input("Introduce la hora en formato 0 a 23 horas: ")
+if hora.isdigit():
+    hora = int(hora)
+    if 0 <= hora <= 23:
+        if 6 <= hora <= 12:
+            print("Es de día")
+        elif 13 <= hora <= 19:
+            print("Es de tarde")
+        else:
+            print("Es de noche")
+    else:
+        print("La hora debe de estar entre 0 y 23")
+else:
+    print ("Por favor, indroduzca un número válido")
 
+# 39. Escribe un programa que determine que califiación en texto tiene un alumno en base a su calificación numérica. Las reglas de califiación son: 0-69 insuficiente, 70 a 79 bien, 80 a 89 muy bien, 90 a 100 excelente
+
+calificacion = input("Por favor introduzca una califiación")
     
 
 
