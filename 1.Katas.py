@@ -362,8 +362,8 @@ alicia.retirar_dinero(50)
 ## 1. Crear una función contar_palabras para contar el número de veces que aparece cada palabra en el texto. Tiene que devolver un diccionario
 
 def contar_palabras(texto):
-    palabras = texto.lower().split() #Texto en minúsculas y separamos por espacios
-    conteo = {} # Creo un diccionario vacío
+    palabras = texto.lower().split()  # Texto en minúsculas y separado por espacios
+    conteo = {}  # Diccionario vacío
     for palabra in palabras:
         if palabra in conteo:
             conteo[palabra] += 1
@@ -371,49 +371,53 @@ def contar_palabras(texto):
             conteo[palabra] = 1
     return conteo
 
-## 2. Crear una función reemplazar_palabras para reempalzr una palabra_original del texto por una palabra_nueva. Tiene que devolver el texto con el remplaxo de palabras
 
-def reemplazar_palabras (texto, palabra_original, palabra_nueva):
+def reemplazar_palabras(texto, palabra_original, palabra_nueva):
     nuevo_texto = texto.replace(palabra_original, palabra_nueva)
     return nuevo_texto
 
-## 3. Crear una función eliminar_palabra para eliminar una palabra del texto. Tiene que devolver el texto con la palabra eliminada
 
 def eliminar_palabra(texto, palabra_eliminar):
     palabras = texto.split()
-    palabras_filtradas =[p for p in palabras if p != palabra_eliminar]
+    palabras_filtradas = [p for p in palabras if p != palabra_eliminar]
     nuevo_texto = " ".join(palabras_filtradas)
     return nuevo_texto
 
-## 4. Crear una función procesar_texto que tome un texto, una opción ente "contar", "reemplazar", "eliminar" y un número de argumentos variables según la opción indicada
 
 def procesar_texto(texto, opcion, *args):
     if opcion == "contar":
         return contar_palabras(texto)
+    
     elif opcion == "reemplazar":
         if len(args) != 2:
             raise ValueError("Debes indicar palabra_original y palabra_nueva para reemplazar")
-
         return reemplazar_palabras(texto, args[0], args[1])
+    
     elif opcion == "eliminar":
         if len(args) != 1:
-            raise ValueError("Debes de indicar la palabra a elimianar")
+            raise ValueError("Debes indicar la palabra a eliminar")
         return eliminar_palabra(texto, args[0])
-    else:
-        raise ValueError("Opción no válida. Usa: 'contar', 'reemplazar' o'eliminar'")
     
-# CASO DE USO. Comprueba el funcionamiento completo de la función procesar_texto
-## 1. Contar palabras
+    else:
+        raise ValueError("Opción no válida. Usa: 'contar', 'reemplazar' o 'eliminar'")
+
+
+# CASO DE USO
+
+texto_original = "Python es un buen programa"
+
+# 1. Contar palabras
 print("Conteo de palabras:")
 print(procesar_texto(texto_original, "contar"))
 
-## 2. Reemplazr palabras
-print("\n reemplazo de palabra:")
-print(procesar_texto(texto_original, "reemplazar", "Python","Programa"))
+# 2. Reemplazar una palabra
+print("\nReemplazo de palabra:")
+print(procesar_texto(texto_original, "reemplazar", "Python", "Programa"))
 
-## 3. Eliminar palabra
-print("\n Eliminación de palabra:")
+# 3. Eliminar palabra
+print("\nEliminación de palabra:")
 print(procesar_texto(texto_original, "eliminar", "fácil"))
+
 
 # 38. Genera un programa que nos diga si es de noche, de día o tarde según la hora proporcionada por el usuario
 
@@ -435,6 +439,23 @@ else:
 # 39. Escribe un programa que determine que califiación en texto tiene un alumno en base a su calificación numérica. Las reglas de califiación son: 0-69 insuficiente, 70 a 79 bien, 80 a 89 muy bien, 90 a 100 excelente
 
 calificacion = input("Por favor introduzca una califiación")
+    
+if calificacion.isdigit():
+    calificacion = int(calificacion)
+
+    if 0 <= calificacion <= 100:
+        if calificacion <= 69:
+            print("Calificación Insuficiente")
+        elif calificacion <= 79:
+            print("Calificación: Bien")
+        elif calificacion <= 89:
+            print("Calificación: Muy Bien")
+        else:
+            print("Calificación: Excelente")
+    else:
+        print("La calificación debe estar entre 0 y 100")
+else:
+    print("Por favor, introduce un número válido")
     
 
 
