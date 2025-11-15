@@ -456,7 +456,72 @@ if calificacion.isdigit():
         print("La calificación debe estar entre 0 y 100")
 else:
     print("Por favor, introduce un número válido")
-    
+
+# 40. Escribe una función que tome dos parámetros: figura(una cadena que puede ser "rectánculo", "ciculo" o "triángulo") y datos (una tupla con los datos necesarioas para calcular el área de la figura).
+
+import math
+def calcular_area (figura, datos):
+    if figura == "rectangulo":
+        base, altura = datos
+        area = base * altura
+        print (f"Area del rectangulo:{area}")
+    elif figura == "triangulo":
+        base, altura = datos
+        area = (base * altura)/ 2
+        print (f"Area del triangulo:{area}")
+    elif figura == "circulo":
+        (radio,) = datos # La coma significa que la túpla tiene un solo valor
+        area =  math.pi * (radio ** 2)
+        print (f"Area del circulo:{area}")
+    else:
+        print("Figura no válida.")
+        return None
+    return area
+
+# 41. En este ejercicio, se te pedirá que escribas un programa en Python que utilice condicionales para determinar el monto final de una compra en una tienda en línea, después de aplicar un descuento. El programa debe de hacer lo siguiente:
+
+## 1. Solicita al usuario que ingrese el precio original del un artículo
+
+precio_original =  input("Introduzca el precio original del artículo €:")
+if precio_original.replace('.','', 1).isdigit():
+    precio_original = float(precio_original)
+
+## 2. Preguntar al usuario si tiene un cupón descuento(respuesta si o no)
+
+    tiene_cupon = input("¿Tiene un cupón descuento?(Si/No):").lower()
+
+## 3. Si el usuario responde que si, solicita que ingrese el valor del cupón de descuento.
+
+    if tiene_cupon == "si":
+        cupon = input("Introduzca el valor del cupón de descuent €:")
+
+## 4. Aplicar el descuento al precio original del artículo, siempre y cuando el valor del cupón sea válido ( es decir, mayor a cero)
+        if cupon.replace('.','', 1).isdigit():
+            cupon =float (cupon)
+            if cupon > 0 and cupon < precio_original:
+                precio_final = precio_original - cupon
+                print("Se aplicó un descuento de {cupon:.2f}€")
+                print("El precio final es:{precio_final:.2f}€")
+            elif cupon >= precio_original:
+                print("El cupón no puede ser igual o mayor que el precio original")
+            else:
+                print("El valor del cupón tienen que ser mayor que 0")
+        else:
+            print("Valor del cupón no válido")  
+
+## 5.Muestra el precio final de la compra, teniendo en cuenta el descuento aplicado o sin el.
+
+    elif tiene_cupon == "no":
+        print(f"No se aplicó descuento. El precio final es:{precio_original:.2f} €")
+    else:
+        print("Respuesta no valida")
+else:
+    print("Precio no válido. Introduzca un número")
+
+
+
+
+
 
 
 
