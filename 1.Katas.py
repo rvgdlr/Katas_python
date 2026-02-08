@@ -1,9 +1,9 @@
  # 1. Escribe una función que reciba una cadena de texto como parámetro y devuelva un diccionario con las frecuencias de cada letra en la cadena. Los espacios no deben ser considerados.
 
 def cadena_frecuencias(texto):
-    frecuencias = {} 
+    frecuencias = {}
     for letra in texto:
-        if letra !="": # Para no considerar espacios
+        if letra != " ":  # Ignorar espacios
             if letra in frecuencias:
                 frecuencias[letra] += 1
             else:
@@ -30,10 +30,11 @@ def diferencia_listas(lista_1,lista_2):
 # 5. Función que tome una lista de números como parámetro y un valor opcional nota_aprobado que por defecto es 5.
 
 def calificar_notas(calificacion, nota_aprobado=5):
-    if calificacion:
-        media = sum(calificacion)/len(calificacion) #Calculo de la media 
-        estado = "aprobado" if media >= nota_aprobado else "suspenso"
-    return(media, estado)
+    if not calificacion:
+        return "No se han ingresado calificaciones"
+    media = sum(calificacion)/len(calificacion)
+    estado = "aprobado" if media >= nota_aprobado else "suspenso"
+    return media, estado
 
 # 6. Escribe una función que calcule el factorial de un número de manera recursiva
 
@@ -145,7 +146,7 @@ def lista_int(elementos):
 
 def cubo_numero(numero):
     cubo = lambda n: n**3
-    return cubo(n)
+    return cubo(numero)
 
 # 22. Dada una lista numérica, obtén el producto total de los valores de dicha lista. Usa la función reduce()
 
@@ -172,9 +173,9 @@ def contar_caracteres(texto):
 
 # 26. Crea una función lambda que calcule el resto de  la división entre dos números dados
 
-def resto_division(n_1,n_2):
-    resto = lambda x, y: x/y
-    return resto(a, b)
+def resto_division(n_1, n_2):
+    resto = lambda x, y: x % y
+    return resto(n_1, n_2)
 
 # 27 Crea una función que calcule el promedio de una lista de números
 
@@ -235,8 +236,9 @@ def buscar_nombre():
 
 def nombre_puesto(nombre, lista_empleados):
     for empleado in lista_empleados:
-        if empleado ["nombre"].lower() == nombre.lower():
-            return f"{empleado["nombre"]} trabaja como {empleado["puesto"]}"
+        if empleado["nombre"].lower() == nombre.lower():
+            return f"{empleado['nombre']} trabaja como {empleado['puesto']}"
+    return "La persona no trabaja aquí"
 
 
 # 33. Crea una función lambda que sume elementos correspondientes de dos listas dadas
@@ -482,65 +484,31 @@ def calcular_area (figura, datos):
 
 ## 1. Solicita al usuario que ingrese el precio original del un artículo
 
-precio_original =  input("Introduzca el precio original del artículo €:")
-if precio_original.replace('.','', 1).isdigit():
+precio_original = input("Introduzca el precio original del artículo (€): ")
+if precio_original.replace('.', '', 1).isdigit():
     precio_original = float(precio_original)
-
-## 2. Preguntar al usuario si tiene un cupón descuento(respuesta si o no)
-
-    tiene_cupon = input("¿Tiene un cupón descuento?(Si/No):").lower()
-
-## 3. Si el usuario responde que si, solicita que ingrese el valor del cupón de descuento.
+    tiene_cupon = input("¿Tiene un cupón descuento? (Si/No): ").lower()
 
     if tiene_cupon == "si":
-        cupon = input("Introduzca el valor del cupón de descuent €:")
-
-## 4. Aplicar el descuento al precio original del artículo, siempre y cuando el valor del cupón sea válido ( es decir, mayor a cero)
-        if cupon.replace('.','', 1).isdigit():
-            cupon =float (cupon)
-            if cupon > 0 and cupon < precio_original:
+        cupon = input("Introduzca el valor del cupón de descuento (€): ")
+        if cupon.replace('.', '', 1).isdigit():
+            cupon = float(cupon)
+            if 0 < cupon < precio_original:
                 precio_final = precio_original - cupon
-                print("Se aplicó un descuento de {cupon:.2f}€")
-                print("El precio final es:{precio_final:.2f}€")
+                print(f"Se aplicó un descuento de {cupon:.2f}€")
+                print(f"El precio final es: {precio_final:.2f}€")
             elif cupon >= precio_original:
-                print("El cupón no puede ser igual o mayor que el precio original")
+                print("El cupón no puede ser igual o mayor que el precio original.")
             else:
-                print("El valor del cupón tienen que ser mayor que 0")
+                print("El valor del cupón tiene que ser mayor que 0.")
         else:
-            print("Valor del cupón no válido")  
-
-## 5.Muestra el precio final de la compra, teniendo en cuenta el descuento aplicado o sin el.
-
+            print("Valor del cupón no válido.")
     elif tiene_cupon == "no":
-        print(f"No se aplicó descuento. El precio final es:{precio_original:.2f} €")
+        print(f"No se aplicó descuento. El precio final es: {precio_original:.2f}€")
     else:
-        print("Respuesta no valida")
+        print("Respuesta no válida.")
 else:
-    print("Precio no válido. Introduzca un número")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
+    print("Precio no válido. Introduzca un número.")
 
 
 
